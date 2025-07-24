@@ -6,11 +6,7 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "yarn@4.9.1",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "sys-link": "./env-links.sh",
     "postinstall": "patch-package",
@@ -35,6 +31,7 @@
   "devDependencies": {
     "@template/eslint-config": "workspace:*",
     "@template/typescript-config": "workspace:*",
+    "@template/ui": "workspace:*",
     "@types/node": "^22.15.3",
     "dotenv-cli": "^8.0.0",
     "husky": "^9.1.7",

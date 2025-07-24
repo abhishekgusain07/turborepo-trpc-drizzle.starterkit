@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { cookies } from "next/headers";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
@@ -10,13 +11,13 @@ import { TanstackProvider } from "@/providers/tanstack-provider";
 import { META_DATA } from "@/constants";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff2",
+  src: "../app/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff2",
+  src: "../app/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -68,6 +69,7 @@ export default function RootLayout({
             <AuthProvider>
               <TRPCReactProvider cookies={cookies().toString()}>
                 {children}
+                <Toaster position="top-right" richColors />
               </TRPCReactProvider>
             </AuthProvider>
           </TanstackProvider>
