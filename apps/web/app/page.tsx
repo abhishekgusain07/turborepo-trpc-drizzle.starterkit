@@ -94,14 +94,14 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Announcement 
+      {/* <Announcement 
         show={showAnnouncement} 
         message={announcement.message}
         link={announcement.link}
         emoji={announcement.emoji}
         onDismiss={handleAnnouncementDismiss}
         onLinkClick={handleFeedbackClick}
-      />
+      /> */}
       <NavbarDemo>
         {/* Hero Section */}
         <section className="pt-8 pb-8 px-4 md:px-8 lg:px-16 flex flex-col items-center text-center">

@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useUser } from "hooks/use-user";
 import { authClient } from "lib/client-auth";
+import ThemeSwitch from "./theme-toggle";
 
 export function NavbarDemo({
     children,
@@ -195,6 +196,7 @@ export function NavbarDemo({
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
+            <ThemeSwitch />
             {renderAuthUI()}
           </div>
         </NavBody>
@@ -224,6 +226,9 @@ export function NavbarDemo({
               </a>
             ))}
             <div className="flex w-full flex-col gap-4">
+              <div className="flex items-center justify-center">
+                <ThemeSwitch />
+              </div>
               {renderMobileAuthUI()}
               <NavbarButton
                 onClick={() => {
