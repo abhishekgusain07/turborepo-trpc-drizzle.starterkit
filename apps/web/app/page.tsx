@@ -1,102 +1,145 @@
-import Image, { type ImageProps } from "next/image";
-import styles from "./page.module.css";
-import { Button } from "@template/ui/button";
+"use client";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
+import { useUser } from "hooks/use-user";
+import { Button } from "components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "components/ui/card";
+import { signIn, signOut } from "lib/client-auth";
+import { LINKS } from "../constants";
+import Link from "next/link";
 
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
+export default function HomePage() {
+  const { user, isLoading, isAuthenticated } = useUser();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
-};
+    <main className="min-h-screen bg-gradient-to-br from-background to-muted/20">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          {/* Hero Section */}
+          <div className="space-y-4">
+            <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-primary to-muted-foreground bg-clip-text text-transparent">
+              Modern Turborepo Template
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              A production-ready starter template with Next.js 15, TypeScript, tRPC, 
+              Drizzle ORM, Better Auth, and modern UI components.
+            </p>
+          </div>
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ThemeImage
-          className={styles.logo}
-          srcLight="turborepo-dark.svg"
-          srcDark="turborepo-light.svg"
-          alt="Turborepo logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <Card>
+              <CardHeader>
+                <CardTitle>🚀 Modern Stack</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Built with Next.js 15, React 19, TypeScript, and the latest tools
+                </CardDescription>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>🔒 Authentication</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Better Auth with Google OAuth, session management, and security
+                </CardDescription>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>🎨 Beautiful UI</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Shadcn/ui components with Tailwind CSS and dark mode support
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://turborepo.com/docs?utm_source"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+          {/* Auth Section */}
+          <div className="mt-12">
+            {isAuthenticated ? (
+              <div className="space-y-4">
+                <Card className="max-w-md mx-auto">
+                  <CardHeader>
+                    <CardTitle>Welcome back, {user?.name}!</CardTitle>
+                    <CardDescription>{user?.email}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Button asChild className="w-full">
+                      <Link href={LINKS.DASHBOARD}>Go to Dashboard</Link>
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => signOut()}
+                      className="w-full"
+                    >
+                      Sign Out
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <Card className="max-w-md mx-auto">
+                  <CardHeader>
+                    <CardTitle>Get Started</CardTitle>
+                    <CardDescription>
+                      Sign in to explore the dashboard and features
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Button 
+                      onClick={() => signIn.social({ provider: "google" })}
+                      className="w-full"
+                    >
+                      Continue with Google
+                    </Button>
+                    <Button variant="outline" asChild className="w-full">
+                      <Link href={LINKS.AUTH.SIGNIN}>Sign In with Email</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+          </div>
+
+          {/* Tech Stack */}
+          <div className="mt-16 pt-8 border-t border-border">
+            <h3 className="text-lg font-semibold mb-4">Built With</h3>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+              <span>Next.js 15</span>
+              <span>•</span>
+              <span>React 19</span>
+              <span>•</span>
+              <span>TypeScript</span>
+              <span>•</span>
+              <span>tRPC</span>
+              <span>•</span>
+              <span>Drizzle ORM</span>
+              <span>•</span>
+              <span>Better Auth</span>
+              <span>•</span>
+              <span>Tailwind CSS</span>
+              <span>•</span>
+              <span>Radix UI</span>
+            </div>
+          </div>
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://turborepo.com?utm_source=create-turbo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to turborepo.com →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }
