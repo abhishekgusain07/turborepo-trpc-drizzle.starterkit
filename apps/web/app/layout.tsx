@@ -18,6 +18,7 @@ import { ThemeProvider } from "providers/theme-provider";
 import { TanstackProvider } from "providers/tanstack-provider";
 import { META_DATA } from "../constants";
 import { cn } from "lib/utils";
+import { JotaiProvider } from "providers";
 
 
 // Geist Sans
@@ -98,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
       className={cn(
           geistSans.variable,
@@ -113,18 +114,20 @@ export default function RootLayout({
       >
           <TanstackProvider>
               <TRPCProvider>
-              <ThemeProvider
-                defaultTheme="light"
-                attribute="class"
-                enableSystem
-                disableTransitionOnChange={false}
-                scriptProps={{
-                  "data-cfasync": "false",
-                }}
-                >
-                {children}
-                <Toaster position="top-right" richColors />
-                </ThemeProvider>
+              <JotaiProvider>
+                <ThemeProvider
+                  defaultTheme="light"
+                  attribute="class"
+                  enableSystem
+                  disableTransitionOnChange={false}
+                  scriptProps={{
+                    "data-cfasync": "false",
+                  }}
+                  >
+                  {children}
+                  <Toaster position="top-right" richColors />
+                  </ThemeProvider>
+                </JotaiProvider>
               </TRPCProvider>
           </TanstackProvider>
       </body>

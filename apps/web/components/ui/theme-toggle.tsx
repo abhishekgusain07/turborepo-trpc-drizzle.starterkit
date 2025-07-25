@@ -1,58 +1,45 @@
 "use client";
 
-import * as SwitchPrimitive from "@radix-ui/react-switch";
-import { useMounted } from "@mantine/hooks";
-
+import * as React from "react";
 import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
-import React from "react";
-import { Moon, Sun} from "app/icons";
+import { Moon, Sun } from "lucide-react";
 
 const ThemeSwitch = () => {
-  const mounted = useMounted();
+  const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
-  
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   if (!mounted) {
     return (
-      <div className="inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent bg-input shadow-xs">
-        <div className="pointer-events-none flex size-4 items-center justify-center rounded-full bg-background transition-transform duration-300" />
-      </div>
+      <button className="h-9 w-9 rounded-md border bg-background flex items-center justify-center">
+        <div className="h-4 w-4 animate-pulse bg-muted rounded" />
+      </button>
     );
   }
-  
+
   const isDark = resolvedTheme === "dark";
-  
+
+  const handleToggle = () => {
+    console.log("Theme toggle clicked. Current theme:", theme, "Resolved:", resolvedTheme);
+    const newTheme = isDark ? "light" : "dark";
+    console.log("Setting theme to:", newTheme);
+    setTheme(newTheme);
+  };
+
+  console.log("ThemeSwitch render - mounted:", mounted, "theme:", theme, "resolvedTheme:", resolvedTheme, "isDark:", isDark);
+
   return (
-    <Switch 
-      checked={isDark} 
-      onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")} 
-    />
+    <button
+      onClick={handleToggle}
+      className="h-9 w-9 rounded-md border bg-background hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors cursor-pointer"
+      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+    >
+      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+    </button>
   );
 };
 
 export default ThemeSwitch;
-
-function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
-  const mounted = useMounted();
-  const { resolvedTheme } = useTheme();
-  
-  return (
-    <SwitchPrimitive.Root
-      data-slot="switch"
-      className={cn(
-        "peer data-[state=checked]:bg-secondary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
-        className,
-      )}
-      {...props}
-    >
-      <SwitchPrimitive.Thumb
-        data-slot="switch-thumb"
-        className={cn(
-          "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none flex size-4 items-center justify-center rounded-full text-black ring-0 transition-transform duration-300 data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0",
-        )}
-      >
-        {mounted && (resolvedTheme === "dark" ? <Moon className="mx-auto size-2.5" /> : <Sun className="mx-auto size-2.5" />)}
-      </SwitchPrimitive.Thumb>
-    </SwitchPrimitive.Root>
-  );
-}
