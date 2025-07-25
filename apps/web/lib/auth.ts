@@ -4,9 +4,15 @@ import { betterAuth } from "better-auth";
 import { db } from "@template/db";
 
 export const serverAuth = betterAuth({
+  baseURL: env.BETTER_AUTH_URL,
+  secret: env.BETTER_AUTH_SECRET,
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: false,
+  },
   socialProviders: {
     google: {
       clientId: env.GOOGLE_CLIENT_ID,

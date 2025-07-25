@@ -45,10 +45,10 @@ export function AuthLayout({ children, title, subtitle, leftContent }: AuthLayou
 
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <Card className="w-full max-w-6xl bg-white/95 backdrop-blur-sm shadow-2xl border-0 overflow-hidden">
-          <div className="grid lg:grid-cols-2 min-h-[600px]">
+        <div className="w-full max-w-6xl bg-white/95 backdrop-blur-sm shadow-2xl rounded-2xl overflow-hidden">
+          <div className="grid lg:grid-cols-2 min-h-[700px]">
             {/* Left Side - Adventure Content */}
-            <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 lg:p-12 flex flex-col justify-between text-white">
+            <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 sm:p-8 lg:p-12 flex flex-col justify-between text-white hidden lg:flex">
               <div className="absolute inset-0 opacity-20">
                 <div 
                   className="w-full h-full"
@@ -68,10 +68,10 @@ export function AuthLayout({ children, title, subtitle, leftContent }: AuthLayou
               </div>
 
               <div className="relative z-10 flex-1 flex flex-col justify-center">
-                <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold mb-6 leading-tight">
                   {leftContent.title}
                 </h1>
-                <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                <p className="text-base lg:text-lg text-gray-300 mb-8 leading-relaxed">
                   {leftContent.description}
                 </p>
                 <p className="text-gray-400">
@@ -80,7 +80,7 @@ export function AuthLayout({ children, title, subtitle, leftContent }: AuthLayou
               </div>
 
               {/* Decorative bird silhouette */}
-              <div className="absolute bottom-8 right-8 opacity-30">
+              <div className="absolute bottom-8 right-8 opacity-30 hidden xl:block">
                 <svg width="80" height="60" viewBox="0 0 80 60" fill="none">
                   <path 
                     d="M20 40C25 35 35 30 50 35C60 38 70 42 75 45C70 48 60 50 50 48C40 46 30 44 25 42C22 41 20 40 20 40Z" 
@@ -95,13 +95,20 @@ export function AuthLayout({ children, title, subtitle, leftContent }: AuthLayou
             </div>
 
             {/* Right Side - Auth Form */}
-            <div className="p-8 lg:p-12 flex flex-col justify-center">
-              <div className="w-full max-w-sm mx-auto">
+            <div className="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+              <div className="w-full max-w-md mx-auto">
+                {/* Mobile logo */}
+                <div className="lg:hidden mb-8 text-center">
+                  <Link href="/" className="inline-block">
+                    <div className="text-2xl font-bold text-slate-900">LOGO</div>
+                  </Link>
+                </div>
+
                 <div className="mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     {title}
                   </h2>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm sm:text-base">
                     {subtitle}
                   </p>
                 </div>
@@ -110,7 +117,7 @@ export function AuthLayout({ children, title, subtitle, leftContent }: AuthLayou
               </div>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,6 @@
 import { serverAuth } from "lib/auth";
 
-export const { GET, POST } = serverAuth.handler;
+const handler = serverAuth.handler;
+
+export const GET = handler;
+export const POST = handler;

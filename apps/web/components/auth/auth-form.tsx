@@ -42,7 +42,7 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {type === "signup" && (
@@ -51,11 +51,11 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel className="text-sm font-medium text-gray-700">Full Name</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder="Enter your full name" 
-                      className="h-12"
+                      className="h-11 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
                       {...field} 
                     />
                   </FormControl>
@@ -70,12 +70,12 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-700">Email</FormLabel>
                 <FormControl>
                   <Input 
                     type="email"
                     placeholder="Enter your email" 
-                    className="h-12"
+                    className="h-11 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
                     {...field} 
                   />
                 </FormControl>
@@ -89,18 +89,18 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-700">Password</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input 
                       type={showPassword ? "text" : "password"}
                       placeholder="••••••••" 
-                      className="h-12 pr-10"
+                      className="h-11 pr-10 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
                       {...field} 
                     />
                     <button
                       type="button"
-                      className="absolute inset-y-0 right-0 flex items-center pr-3"
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 hover:text-gray-600"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (
@@ -122,18 +122,18 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel className="text-sm font-medium text-gray-700">Confirm Password</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input 
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="••••••••" 
-                        className="h-12 pr-10"
+                        className="h-11 pr-10 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
                         {...field} 
                       />
                       <button
                         type="button"
-                        className="absolute inset-y-0 right-0 flex items-center pr-3"
+                        className="absolute inset-y-0 right-0 flex items-center pr-3 hover:text-gray-600"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                       >
                         {showConfirmPassword ? (
@@ -151,7 +151,7 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
           )}
 
           {type === "signin" && (
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2">
               <div className="flex items-center space-x-2">
                 <Checkbox id="remember" />
                 <Label htmlFor="remember" className="text-sm text-gray-600">
@@ -160,36 +160,38 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
               </div>
               <Link 
                 href="/auth/forgot-password" 
-                className="text-sm text-blue-600 hover:text-blue-500"
+                className="text-sm text-blue-600 hover:text-blue-500 transition-colors"
               >
-                Forgot password
+                Forgot password?
               </Link>
             </div>
           )}
 
-          <Button 
-            type="submit" 
-            className="w-full h-12 bg-slate-900 hover:bg-slate-800"
-            disabled={isLoading}
-          >
-            {isLoading ? "Loading..." : type === "signin" ? "Sign in" : "Create account"}
-          </Button>
+          <div className="pt-2">
+            <Button 
+              type="submit" 
+              className="w-full h-11 bg-slate-900 hover:bg-slate-700 text-white font-medium transition-colors"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : type === "signin" ? "Sign in" : "Create account"}
+            </Button>
+          </div>
         </form>
       </Form>
 
-      <div className="relative">
+      <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-2 text-gray-500">Or continue with</span>
+          <span className="bg-white px-3 text-gray-500 font-medium">Or continue with</span>
         </div>
       </div>
 
       <Button
         type="button"
         variant="outline"
-        className="w-full h-12"
+        className="w-full h-11 border-gray-300 hover:bg-gray-50 transition-colors"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
       >
@@ -214,11 +216,11 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
         Sign in with Google
       </Button>
 
-      <p className="text-center text-sm text-gray-600">
+      <p className="text-center text-sm text-gray-600 pt-2">
         {type === "signin" ? "Don't have an account?" : "Already have an account?"}{" "}
         <Link
           href={type === "signin" ? LINKS.AUTH.SIGNUP : LINKS.AUTH.SIGNIN}
-          className="font-medium text-blue-600 hover:text-blue-500"
+          className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
         >
           {type === "signin" ? "Sign up" : "Sign in"}
         </Link>
