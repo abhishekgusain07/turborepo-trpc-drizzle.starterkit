@@ -1,145 +1,159 @@
 "use client";
-
-import { useUser } from "hooks/use-user";
-import { Button } from "components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "components/ui/card";
-import { signIn, signOut } from "lib/client-auth";
-import { LINKS } from "../constants";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import ProblemSection from "./components/problem";
+import SolutionSection from "./components/solution";
+import Footer from "./components/footer";
+import TechnologyUsed from "./components/techused";
+import Announcement from "./components/announcement";
+import type { LucideIcon } from "lucide-react";
+import { NavbarDemo } from "components/ui/navbar";
+import Pricing from "./components/pricing";
+import { useFeedbackModal } from "hooks/useFeedbackModal";
+import { useUser } from "hooks/use-user";
+import { HoverEffect } from "components/effect/card-hover-effect";
 
-export default function HomePage() {
-  const { user, isLoading, isAuthenticated } = useUser();
+export default function Home() {
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
+  const { user } = useUser();
+  const { openFeedbackModal, FeedbackModalComponent } = useFeedbackModal(user?.id);
+  
+  useEffect(() => {
+    // Check if the announcement has been dismissed before
+    const announcementDismissed = localStorage.getItem('announcement_dismissed');
+    if (!announcementDismissed) {
+      setShowAnnouncement(true);
+    }
+  }, []);
+  
+  const handleAnnouncementDismiss = () => {
+    // Store the dismissal in localStorage so it stays dismissed on refresh
+    localStorage.setItem('announcement_dismissed', 'true');
+    setShowAnnouncement(false);
+  };
+  
+  const announcement = {
+    message: "We value your input! Please",
+    link: {
+      text: "share your feedback",
+      url: "#feedback"
+    },
+    emoji: "💬"
+  };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  // Handler for the announcement link click
+  const handleFeedbackClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    openFeedbackModal();
+  };
+
+  const features: Array<{
+    title: string;
+    description: string;
+    link: string;
+    icon?: LucideIcon;
+  }> = [
+    {
+      title: "Authentication",
+      description:
+        "Complete auth system with email, social login, magic links, and MFA support for secure user management.",
+      link: "#auth",
+    },
+    {
+      title: "Payments",
+      description:
+        "Stripe integration with subscription management, pricing tiers, and billing portal for smooth revenue collection.",
+      link: "#payments",
+    },
+    {
+      title: "Analytics",
+      description:
+        "Built-in analytics with PostHog and error tracking with Sentry to monitor user behavior and application health.",
+      link: "#analytics",
+    },
+    {
+      title: "Database",
+      description:
+        "Serverless PostgreSQL with Neon and Drizzle ORM for type-safe database operations with automatic scaling.",
+      link: "#database",
+    },
+    {
+      title: "UI Components",
+      description:
+        "Beautiful, accessible UI components built with Radix UI and styled with Tailwind CSS for rapid development.",
+      link: "#ui",
+    },
+    {
+      title: "Deployment",
+      description:
+        "Optimized for deployment on Vercel with continuous integration and automatic preview deployments.",
+      link: "#deployment",
+    },
+  ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background to-muted/20">
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Hero Section */}
-          <div className="space-y-4">
-            <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-primary to-muted-foreground bg-clip-text text-transparent">
-              Modern Turborepo Template
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A production-ready starter template with Next.js 15, TypeScript, tRPC, 
-              Drizzle ORM, Better Auth, and modern UI components.
+    <div className="flex flex-col min-h-screen">
+      <Announcement 
+        show={showAnnouncement} 
+        message={announcement.message}
+        link={announcement.link}
+        emoji={announcement.emoji}
+        onDismiss={handleAnnouncementDismiss}
+        onLinkClick={handleFeedbackClick}
+      />
+      <NavbarDemo>
+        {/* Hero Section */}
+        <section className="pt-8 pb-8 px-4 md:px-8 lg:px-16 flex flex-col items-center text-center">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-200 leading-tight">
+            Ship Your SaaS <br />
+            <span className="inline-block mt-1 mb-2">Blazingly Fast</span>
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-xl mb-6">
+            Everything you need, ready to launch.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link href="/dashboard" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-md font-medium text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
+              Get Started
+            </Link>
+          </div>
+        </section>
+        
+        <TechnologyUsed />
+        {/* Features Section */}
+        <section id="features" className="py-16 px-4 md:px-8 lg:px-16 bg-secondary/20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-16">Everything You Need</h2>
+            <HoverEffect items={features} />
+          </div>
+        </section>
+
+
+        <ProblemSection />
+
+        <SolutionSection />
+        {/* Pricing Section */}
+        <section className="py-16 px-4 md:px-8 lg:px-16">
+          <Pricing />
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 px-4 md:px-8 lg:px-16 bg-primary/5">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Launch your SaaS in record time with our production-ready template.
             </p>
+            <Link href="/sign-up" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-md font-medium inline-block">
+              Start Building Now
+            </Link>
           </div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <Card>
-              <CardHeader>
-                <CardTitle>🚀 Modern Stack</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Built with Next.js 15, React 19, TypeScript, and the latest tools
-                </CardDescription>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle>🔒 Authentication</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Better Auth with Google OAuth, session management, and security
-                </CardDescription>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle>🎨 Beautiful UI</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Shadcn/ui components with Tailwind CSS and dark mode support
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Auth Section */}
-          <div className="mt-12">
-            {isAuthenticated ? (
-              <div className="space-y-4">
-                <Card className="max-w-md mx-auto">
-                  <CardHeader>
-                    <CardTitle>Welcome back, {user?.name}!</CardTitle>
-                    <CardDescription>{user?.email}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <Button asChild className="w-full">
-                      <Link href={LINKS.DASHBOARD}>Go to Dashboard</Link>
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={() => signOut()}
-                      className="w-full"
-                    >
-                      Sign Out
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <Card className="max-w-md mx-auto">
-                  <CardHeader>
-                    <CardTitle>Get Started</CardTitle>
-                    <CardDescription>
-                      Sign in to explore the dashboard and features
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <Button 
-                      onClick={() => signIn.social({ provider: "google" })}
-                      className="w-full"
-                    >
-                      Continue with Google
-                    </Button>
-                    <Button variant="outline" asChild className="w-full">
-                      <Link href={LINKS.AUTH.SIGNIN}>Sign In with Email</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
-          </div>
-
-          {/* Tech Stack */}
-          <div className="mt-16 pt-8 border-t border-border">
-            <h3 className="text-lg font-semibold mb-4">Built With</h3>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-              <span>Next.js 15</span>
-              <span>•</span>
-              <span>React 19</span>
-              <span>•</span>
-              <span>TypeScript</span>
-              <span>•</span>
-              <span>tRPC</span>
-              <span>•</span>
-              <span>Drizzle ORM</span>
-              <span>•</span>
-              <span>Better Auth</span>
-              <span>•</span>
-              <span>Tailwind CSS</span>
-              <span>•</span>
-              <span>Radix UI</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+        </section>
+        <Footer />
+      </NavbarDemo>
+      
+      {/* Render the feedback modal */}
+      <FeedbackModalComponent />
+    </div>
   );
 }

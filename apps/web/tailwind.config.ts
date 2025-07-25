@@ -1,65 +1,39 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
-  darkMode: ["class"],
+export default {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
-    "./hooks/**/*.{js,ts,jsx,tsx,mdx}",
-    "./providers/**/*.{js,ts,jsx,tsx,mdx}",
-    "./trpc/**/*.{js,ts,jsx,tsx,mdx}",
-    "./zod-schemas/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      fontFamily: {
-        sans: ["var(--font-geist-sans)"],
-        mono: ["var(--font-geist-mono)"],
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        
+        "card-background": "var(--card-background)",
+        "card-border": "var(--card-border)",
+        "card-hover": "var(--card-hover)",
+        
+        "muted-foreground": "var(--muted-foreground)",
+        
+        primary: "var(--primary)",
+        "primary-foreground": "var(--primary-foreground)",
+        
+        secondary: "var(--secondary)",
+        "secondary-foreground": "var(--secondary-foreground)",
+        
+        accent: "var(--accent)",
+        "accent-foreground": "var(--accent-foreground)",
+        
+        destructive: "var(--destructive)",
+        "destructive-foreground": "var(--destructive-foreground)",
+        
+        border: "var(--border)",
+        input: "var(--input)",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-};
-
-export default config;
+  plugins: [],
+} satisfies Config;
