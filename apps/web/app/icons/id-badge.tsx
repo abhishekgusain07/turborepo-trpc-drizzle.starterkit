@@ -6,11 +6,21 @@ type IconProps = SVGProps<SVGSVGElement> & {
   title?: string;
 };
 
-function IdBadge({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function IdBadge({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M3.75 3.5C2.23079 3.5 1 4.73079 1 6.25V12.75C1 14.2692 2.23079 15.5 3.75 15.5H14.25C15.7692 15.5 17 14.2692 17 12.75V6.25C17 4.73079 15.7692 3.5 14.25 3.5H3.75Z"

@@ -3,7 +3,7 @@ import { env } from "@template/utilities";
 import { betterAuth } from "better-auth";
 import { db } from "@template/db";
 
-export const serverAuth = betterAuth({
+export const serverAuth: any = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
   database: drizzleAdapter(db, {

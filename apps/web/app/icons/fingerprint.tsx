@@ -6,11 +6,21 @@ type IconProps = SVGProps<SVGSVGElement> & {
   title?: string;
 };
 
-function Fingerprint({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function Fingerprint({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M9.00001 2.75C7.68924 2.75 6.48996 3.23143 5.56899 4.02896C5.25586 4.30012 4.78221 4.2661 4.51105 3.95297C4.2399 3.63985 4.27392 3.16619 4.58704 2.89504C5.77007 1.87057 7.31478 1.25 9.00001 1.25C12.7232 1.25 15.75 4.27679 15.75 8C15.75 10.387 15.3742 12.5347 14.7222 14.4542C14.5889 14.8464 14.163 15.0564 13.7708 14.9232C13.3786 14.7899 13.1686 14.364 13.3019 13.9718C13.8998 12.2113 14.25 10.227 14.25 8C14.25 5.10521 11.8948 2.75 9.00001 2.75Z"

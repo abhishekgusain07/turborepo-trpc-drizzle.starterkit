@@ -6,11 +6,21 @@ type IconProps = SVGProps<SVGSVGElement> & {
   title?: string;
 };
 
-function SortNumDescending({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function SortNumDescending({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M5.4417 1.27492C5.77076 1.36193 5.99997 1.65963 5.99997 2V7.5C5.99997 7.91421 5.66419 8.25 5.24997 8.25C4.83576 8.25 4.49997 7.91421 4.49997 7.5V3.70895C4.19542 3.87848 3.83722 4.0215 3.42402 4.10062C3.01719 4.17851 2.62425 3.91187 2.54636 3.50504C2.46846 3.09822 2.73511 2.70528 3.14193 2.62738C3.63083 2.53377 3.99795 2.2834 4.25075 2.04276C4.37645 1.92311 4.46894 1.81037 4.5281 1.73054C4.56069 1.68657 4.58936 1.64073 4.61885 1.59482C4.79378 1.32249 5.12584 1.1914 5.4417 1.27492Z"

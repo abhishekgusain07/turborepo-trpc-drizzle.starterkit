@@ -1,11 +1,21 @@
 import { IconProps } from "@/types";
 import React from "react";
 
-function BoxPlus({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function BoxPlus({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M4.75 4.5C3.23069 4.5 2 5.73128 2 7.25V13.25C2 14.7687 3.23069 16 4.75 16H10.3789C10.1396 15.6425 10 15.2125 10 14.75C10 13.5074 11.0074 12.5 12.25 12.5H12.5V12.25C12.5 11.0074 13.5074 10 14.75 10C15.2125 10 15.6425 10.1396 16 10.3789V7.25C16 5.73128 14.7693 4.5 13.25 4.5H4.75Z"

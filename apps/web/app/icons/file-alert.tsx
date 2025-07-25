@@ -1,11 +1,21 @@
 import { IconProps } from "@/types";
 import React from "react";
 
-function FileAlert({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function FileAlert({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M11.572 1.512L15.487 5.427C15.8155 5.7553 16 6.2009 16 6.6655L15.9957 9.38017C15.3984 8.43781 14.3679 7.86879 13.25 7.86879C12.1322 7.86879 11.1017 8.43732 10.5044 9.37996L7.57121 14.0111C7.00071 14.9122 6.91202 16.0288 7.31674 17H4.75C3.2312 17 2 15.7688 2 14.25V3.75C2 2.2312 3.2312 1 4.75 1H10.336C10.7996 1 11.2442 1.1841 11.572 1.512Z"

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { cookies } from "next/headers";
+
 import { Toaster } from "sonner";
 import {
   Geist,
@@ -19,7 +18,6 @@ import { TanstackProvider } from "providers/tanstack-provider";
 import { META_DATA } from "../constants";
 import { cn } from "lib/utils";
 import { JotaiProvider } from "providers";
-
 
 // Geist Sans
 const geistSans = Geist({
@@ -101,7 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-      className={cn(
+        className={cn(
           geistSans.variable,
           geistMono.variable,
           jetBrainsMono.variable,
@@ -112,24 +110,24 @@ export default function RootLayout({
           "antialiased",
         )}
       >
-          <TanstackProvider>
-              <TRPCProvider>
-              <JotaiProvider>
-                <ThemeProvider
-                  defaultTheme="light"
-                  attribute="class"
-                  enableSystem
-                  disableTransitionOnChange={false}
-                  scriptProps={{
-                    "data-cfasync": "false",
-                  }}
-                  >
-                  {children}
-                  <Toaster position="top-right" richColors />
-                  </ThemeProvider>
-                </JotaiProvider>
-              </TRPCProvider>
-          </TanstackProvider>
+        <TanstackProvider>
+          <TRPCProvider>
+            <JotaiProvider>
+              <ThemeProvider
+                defaultTheme="light"
+                attribute="class"
+                enableSystem
+                disableTransitionOnChange={false}
+                scriptProps={{
+                  "data-cfasync": "false",
+                }}
+              >
+                {children}
+                <Toaster position="top-right" richColors />
+              </ThemeProvider>
+            </JotaiProvider>
+          </TRPCProvider>
+        </TanstackProvider>
       </body>
     </html>
   );

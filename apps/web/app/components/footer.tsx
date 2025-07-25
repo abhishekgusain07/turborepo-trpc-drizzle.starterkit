@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 // --- Icon Components ---
 
@@ -81,9 +82,9 @@ const Footer = () => {
     <footer className="py-16 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         {/* Homepage Link */}
-        <a aria-label="go home" className="mx-auto block size-fit font-semibold" href="/">
+        <Link aria-label="go home" className="mx-auto block size-fit font-semibold" href="/">
           PrintMoney Template
-        </a>
+        </Link>
 
         {/* Navigation Links */}
         <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">

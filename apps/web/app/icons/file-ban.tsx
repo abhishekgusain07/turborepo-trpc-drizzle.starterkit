@@ -6,11 +6,21 @@ type IconProps = SVGProps<SVGSVGElement> & {
   title?: string;
 };
 
-function FileBan({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function FileBan({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M11.572 1.512L15.487 5.427C15.8155 5.7553 16 6.2009 16 6.6655V8.87493C15.3801 8.63286 14.7056 8.5 14 8.5C10.9623 8.5 8.5 10.9625 8.5 14C8.5 15.1068 8.82691 16.1372 9.38946 17H4.75C3.2312 17 2 15.7688 2 14.25V3.75C2 2.2312 3.2312 1 4.75 1H10.336C10.7996 1 11.2442 1.1841 11.572 1.512Z"

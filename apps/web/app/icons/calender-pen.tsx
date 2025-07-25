@@ -1,11 +1,21 @@
 import { IconProps } from "@/types";
 import React from "react";
 
-function CalendarPen({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function CalendarPen({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M4.25 2C2.73128 2 1.5 3.23069 1.5 4.75V13.25C1.5 14.7693 2.73128 16 4.25 16H8.88058L9.79611 13.3444C9.90742 13.0215 10.0908 12.7283 10.3323 12.4868L13.4935 9.32556C14.3094 8.50963 15.4513 8.21824 16.5 8.45141V4.75C16.5 3.23069 15.2687 2 13.75 2H4.25Z"

@@ -1,6 +1,8 @@
 import * as React from "react";
 
 type IconProps = React.SVGProps<SVGSVGElement> & {
+  width?: number | string;
+  height?: number | string;
   secondaryfill?: string;
   strokewidth?: number;
   title?: string;

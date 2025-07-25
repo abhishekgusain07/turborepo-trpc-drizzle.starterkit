@@ -10,7 +10,13 @@ function Blog({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M2 3.75C2 2.23079 3.23079 1 4.75 1H13.25C14.7692 1 16 2.23079 16 3.75V8.36571C15.3677 8.44497 14.7575 8.72181 14.2795 9.19806L11.0912 12.3884C10.7801 12.6968 10.54 13.062 10.3762 13.4661L10.2663 13.7371L9.74566 15.0303C9.48301 15.6807 9.54124 16.408 9.88376 17H4.75C3.23079 17 2 15.7692 2 14.25V3.75Z"

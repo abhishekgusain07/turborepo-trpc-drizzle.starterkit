@@ -6,11 +6,21 @@ type IconProps = SVGProps<SVGSVGElement> & {
   title?: string;
 };
 
-function HardDrive({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function HardDrive({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M1 11.75C1 10.2312 2.23119 9 3.75 9H14.25C15.7688 9 17 10.2312 17 11.75V12.75C17 14.2688 15.7688 15.5 14.25 15.5H3.75C2.23119 15.5 1 14.2688 1 12.75V11.75Z"

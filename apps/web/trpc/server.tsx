@@ -1,12 +1,11 @@
 import { cache } from "react";
-import { createTRPCMsw } from "msw-trpc";
-import { createCaller } from "@trpc/server";
+// import { createTRPCMsw } from "msw-trpc";
 import { headers } from "next/headers";
 
 import { appRouter } from "./routers/_app";
 
-const createContext = cache(() => {
-  const heads = new Headers(headers());
+const createContext = cache(async () => {
+  const heads = new Headers(await headers());
   heads.set("x-trpc-source", "rsc");
 
   return {
@@ -14,6 +13,6 @@ const createContext = cache(() => {
   };
 });
 
-export const api = createCaller(appRouter)(createContext);
+export const api = appRouter.createCaller(createContext);
 
-export const mockTrpc = createTRPCMsw(appRouter);
+// export const mockTrpc = createTRPCMsw(appRouter);

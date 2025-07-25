@@ -21,7 +21,11 @@ function getQueryClient() {
   return (clientQueryClientSingleton ??= makeQueryClient());
 }
 
-export const { TRPCProvider: TanstackTRPCProvider, useTRPC, useTRPCClient } = createTRPCContext<AppRouter>();
+export const {
+  TRPCProvider: TanstackTRPCProvider,
+  useTRPC,
+  useTRPCClient,
+} = createTRPCContext<AppRouter>();
 
 interface TRPCProviderProps {
   children: React.ReactNode;
@@ -55,5 +59,10 @@ export function TRPCProvider(props: Readonly<TRPCProviderProps>) {
 
 // Trpc Proxy Client
 export const trpcProxyClient = createTRPCClient<AppRouter>({
-  links: [httpBatchLink({ url: env.NEXT_PUBLIC_TRPC_BASE_URL, transformer: superjsonTransformer })],
+  links: [
+    httpBatchLink({
+      url: env.NEXT_PUBLIC_TRPC_BASE_URL,
+      transformer: superjsonTransformer,
+    }),
+  ],
 });

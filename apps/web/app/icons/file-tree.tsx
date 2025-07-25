@@ -6,11 +6,21 @@ type IconProps = SVGProps<SVGSVGElement> & {
   title?: string;
 };
 
-function FileTree({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function FileTree({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M9 2.75C9 1.78379 9.78379 1 10.75 1H12.75C12.9489 1 13.1397 1.07902 13.2803 1.21967L14.7803 2.71967C14.921 2.86032 15 3.05109 15 3.25V6.75C15 7.71621 14.2162 8.5 13.25 8.5H10.75C9.78379 8.5 9 7.71621 9 6.75V2.75Z"

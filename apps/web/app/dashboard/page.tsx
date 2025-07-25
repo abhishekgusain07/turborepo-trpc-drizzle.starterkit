@@ -1,7 +1,13 @@
 "use client";
 
 import { useUser } from "hooks/use-user";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "components/ui/card";
 import { Button } from "components/ui/button";
 import { Badge } from "components/ui/badge";
 
@@ -72,7 +78,7 @@ export default function DashboardPage() {
       <div>
         <h1 className="text-3xl font-bold">Welcome back, {user?.name}!</h1>
         <p className="text-muted-foreground mt-2">
-          Here's what's happening with your application today.
+          Here&apos;s what&apos;s happening with your application today.
         </p>
       </div>
 
@@ -127,8 +133,8 @@ export default function DashboardPage() {
                         activity.status === "success"
                           ? "default"
                           : activity.status === "error"
-                          ? "destructive"
-                          : "secondary"
+                            ? "destructive"
+                            : "secondary"
                       }
                       className="text-xs"
                     >
@@ -148,9 +154,7 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>
-              Common tasks and shortcuts
-            </CardDescription>
+            <CardDescription>Common tasks and shortcuts</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -183,9 +187,7 @@ export default function DashboardPage() {
       <Card>
         <CardHeader>
           <CardTitle>Your Account</CardTitle>
-          <CardDescription>
-            Account information and preferences
-          </CardDescription>
+          <CardDescription>Account information and preferences</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -205,8 +207,10 @@ export default function DashboardPage() {
             </div>
             <div className="space-y-2">
               <p className="text-sm font-medium">Data Saving</p>
-              <Badge variant={user?.allowedSavingData ? "default" : "secondary"}>
-                {user?.allowedSavingData ? "Enabled" : "Disabled"}
+              <Badge
+                variant={(user as any)?.allowedSavingData ? "default" : "secondary"}
+              >
+                {(user as any)?.allowedSavingData ? "Enabled" : "Disabled"}
               </Badge>
             </div>
           </div>

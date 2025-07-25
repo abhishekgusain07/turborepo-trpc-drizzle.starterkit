@@ -46,7 +46,6 @@ interface MobileNavMenuProps {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
-  onClose: () => void;
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
@@ -195,7 +194,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
@@ -243,9 +241,11 @@ export const NavbarLogo = () => {
         height={30}
         className="rounded-lg"
       />
-      
+
       <div className="font-sans">
-        <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-black">PrintMoney</span>
+        <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-black">
+          PrintMoney
+        </span>
       </div>
     </Link>
   );
@@ -290,3 +290,59 @@ export const NavbarButton = ({
     </Tag>
   );
 };
+
+
+export function NavbarDemo() {
+  const [isOpen, setIsOpen] = useState(false);
+  const navItems = [
+    {
+      name: "Features",
+      link: "#features",
+    },
+    {
+      name: "Pricing",
+      link: "#pricing",
+    },
+    {
+      name: "Docs",
+      link: "/docs",
+    },
+  ];
+  return (
+    <Navbar>
+      <NavBody>
+        <NavbarLogo />
+        <NavItems items={navItems} />
+        <div className="relative z-20 flex flex-row items-center space-x-2">
+          <NavbarButton href="/login" variant="secondary">
+            Login
+          </NavbarButton>
+          <NavbarButton href="/signup" variant="gradient">
+            Sign up
+          </NavbarButton>
+        </div>
+      </NavBody>
+      <MobileNav>
+        <MobileNavHeader>
+          <NavbarLogo />
+          <MobileNavToggle isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+        </MobileNavHeader>
+        <MobileNavMenu isOpen={isOpen}>
+          <NavItems
+            onItemClick={() => setIsOpen(false)}
+            items={navItems}
+            className="flex flex-col items-start space-x-0 space-y-2"
+          />
+          <div className="mt-4 flex w-full flex-col items-start space-y-2">
+            <NavbarButton href="/login" variant="secondary" className="w-full">
+              Login
+            </NavbarButton>
+            <NavbarButton href="/signup" variant="gradient" className="w-full">
+              Sign up
+            </NavbarButton>
+          </div>
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
+  );
+}

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { AuthLayout } from "components/auth/auth-layout";
 import { AuthForm } from "components/auth/auth-form";
 import { signUp } from "lib/client-auth";
-import { LINKS } from "constants";
+import { LINKS } from "../../../constants";
 import type { SignUpInput } from "zod-schemas/auth";
 
 export default function SignUpPage() {
@@ -44,15 +44,12 @@ export default function SignUpPage() {
       subtitle="Start your adventure today! Please enter your details."
       leftContent={{
         title: "BEGIN YOUR JOURNEY!",
-        description: "Join thousands of adventurers who trust us with their dream destinations. Create your account to unlock exclusive deals, personalized recommendations, and unforgettable experiences.",
-        footer: "Adventure is calling your name."
+        description:
+          "Join thousands of adventurers who trust us with their dream destinations. Create your account to unlock exclusive deals, personalized recommendations, and unforgettable experiences.",
+        footer: "Adventure is calling your name.",
       }}
     >
-      <AuthForm 
-        type="signup" 
-        onSubmit={handleSignUp}
-        isLoading={isLoading}
-      />
+      <AuthForm type="signup" onSubmit={handleSignUp} isLoading={isLoading} />
     </AuthLayout>
   );
 }

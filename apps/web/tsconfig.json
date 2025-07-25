@@ -3,7 +3,19 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "components/*": ["./components/*"],
+      "lib/*": ["./lib/*"],
+      "hooks/*": ["./hooks/*"],
+      "constants": ["./constants/index.ts"],
+      "constants/*": ["./constants/*"],
+      "zod-schemas/*": ["./zod-schemas/*"],
+      "types/*": ["./types/*"],
+      "@/types": ["./types/index.ts"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/components/*": ["./components/*"],
+      "providers/*": ["./providers/*"],
+      "trpc/*": ["./trpc/*"]
     },
     "plugins": [
       {

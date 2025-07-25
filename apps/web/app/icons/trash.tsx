@@ -5,7 +5,13 @@ function Trash2({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M3.65771 5L4.1525 14.394C4.2287 15.8554 5.43569 17 6.89859 17H11.1027C12.5656 17 13.7726 15.8555 13.8488 14.3945L14.3436 5H3.65771Z"

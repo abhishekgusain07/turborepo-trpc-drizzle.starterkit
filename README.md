@@ -5,12 +5,14 @@ A production-ready, full-stack turborepo template with modern tools and best pra
 ## ✨ Features
 
 ### 🏗️ **Architecture**
+
 - **Turborepo** - High-performance monorepo build system
 - **Yarn Workspaces** - Efficient dependency management
 - **TypeScript** - End-to-end type safety
 - **ESLint & Prettier** - Code quality and consistency
 
 ### 🎨 **Frontend**
+
 - **Next.js 15.3.1** - React framework with App Router
 - **React 19** - Latest React with concurrent features
 - **Tailwind CSS 4** - Utility-first CSS framework
@@ -20,38 +22,45 @@ A production-ready, full-stack turborepo template with modern tools and best pra
 - **Next Themes** - Dark/light mode support
 
 ### 🔒 **Authentication**
+
 - **Better Auth 1.2.8** - Modern authentication library
 - **Google OAuth** - Social authentication
 - **Session management** - Secure session handling
 - **User profiles** - Complete user management
 
 ### 🗄️ **Database**
+
 - **Drizzle ORM 0.43.1** - Type-safe database toolkit
 - **PostgreSQL** - Robust relational database
 - **Neon Database** - Serverless PostgreSQL (recommended)
 - **Migrations** - Schema version control
 
 ### 🌐 **API**
+
 - **tRPC 11.1.2** - End-to-end type-safe APIs
 - **TanStack Query 5.76.1** - Powerful data fetching
 - **Zod 3.25.7** - Schema validation
 - **Superjson** - JSON serialization with type safety
 
 ### 📦 **State Management**
+
 - **Jotai 2.12.3** - Atomic state management
 - **React Query** - Server state management
 - **Context API** - Global state patterns
 
 ### 🧪 **Testing** (Ready to configure)
+
 - **Jest** - Unit testing framework
 - **Playwright** - End-to-end testing
 - **React Testing Library** - Component testing
 
 ### 📊 **Analytics** (Optional)
+
 - **PostHog** - Product analytics
 - **OpenPanel** - Privacy-focused analytics
 
 ### ☁️ **File Storage** (Optional)
+
 - **Cloudflare R2** - S3-compatible object storage
 
 ## 📁 Project Structure

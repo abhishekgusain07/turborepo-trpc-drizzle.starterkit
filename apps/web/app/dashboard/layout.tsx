@@ -3,7 +3,7 @@
 import { useUser } from "hooks/use-user";
 import { Button } from "components/ui/button";
 import { signOut } from "lib/client-auth";
-import { LINKS } from "constants";
+import { LINKS } from "../../constants";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -57,16 +57,12 @@ export default function DashboardLayout({
                 </Link>
               </nav>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <span className="text-sm text-muted-foreground">
                 {user?.name}
               </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => signOut()}
-              >
+              <Button variant="outline" size="sm" onClick={() => signOut()}>
                 Sign Out
               </Button>
             </div>
@@ -75,9 +71,7 @@ export default function DashboardLayout({
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        {children}
-      </main>
+      <main className="container mx-auto px-4 py-8">{children}</main>
     </div>
   );
 }

@@ -1,13 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useFeedbackModal } from "@/hooks/useFeedbackModal";
+import { Button } from "../button";
+import { useFeedbackModal } from "../../../hooks/useFeedbackModal";
 import { MessageSquareHeart } from "lucide-react";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "../../../hooks/use-user";
 
 export function FeedbackButton() {
   const { user } = useUser();
-  const { openFeedbackModal, FeedbackModalComponent } = useFeedbackModal(user?.id);
+  const { openFeedbackModal, FeedbackModalComponent } = useFeedbackModal(
+    user?.id,
+  );
 
   return (
     <>
@@ -21,4 +23,4 @@ export function FeedbackButton() {
       <FeedbackModalComponent />
     </>
   );
-} 
+}

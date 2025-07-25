@@ -6,11 +6,21 @@ type IconProps = SVGProps<SVGSVGElement> & {
   title?: string;
 };
 
-function TriangleWarning({ fill = "currentColor", secondaryfill, ...props }: IconProps) {
+function TriangleWarning({
+  fill = "currentColor",
+  secondaryfill,
+  ...props
+}: IconProps) {
   secondaryfill = secondaryfill || fill;
 
   return (
-    <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      height="18"
+      width="18"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill={fill}>
         <path
           d="M14.4249 16H3.57529C2.73549 16 1.98348 15.5659 1.56358 14.8389C1.14368 14.1114 1.14368 13.2432 1.56358 12.5161L6.98889 3.12012C7.40829 2.39302 8.16029 1.95898 9.00009 1.95898C9.83989 1.95898 10.5919 2.39312 11.0113 3.12012L16.4366 12.5161C16.8565 13.2441 16.8565 14.1124 16.4366 14.8394C16.0167 15.566 15.2647 16 14.4249 16Z"

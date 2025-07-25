@@ -23,13 +23,27 @@ const ThemeSwitch = () => {
   const isDark = resolvedTheme === "dark";
 
   const handleToggle = () => {
-    console.log("Theme toggle clicked. Current theme:", theme, "Resolved:", resolvedTheme);
+    console.log(
+      "Theme toggle clicked. Current theme:",
+      theme,
+      "Resolved:",
+      resolvedTheme,
+    );
     const newTheme = isDark ? "light" : "dark";
     console.log("Setting theme to:", newTheme);
     setTheme(newTheme);
   };
 
-  console.log("ThemeSwitch render - mounted:", mounted, "theme:", theme, "resolvedTheme:", resolvedTheme, "isDark:", isDark);
+  console.log(
+    "ThemeSwitch render - mounted:",
+    mounted,
+    "theme:",
+    theme,
+    "resolvedTheme:",
+    resolvedTheme,
+    "isDark:",
+    isDark,
+  );
 
   return (
     <button

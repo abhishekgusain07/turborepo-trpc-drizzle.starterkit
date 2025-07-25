@@ -16,13 +16,9 @@ export function useFeedbackModal(userId?: string) {
 
   const FeedbackModalComponent = useCallback(
     () => (
-      <FeedbackModal
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        userId={userId}
-      />
+      <FeedbackModal open={isOpen} onOpenChange={setIsOpen} userId={userId} />
     ),
-    [isOpen, userId]
+    [isOpen, userId],
   );
 
   return {
@@ -31,4 +27,4 @@ export function useFeedbackModal(userId?: string) {
     closeFeedbackModal,
     FeedbackModalComponent,
   };
-} 
+}

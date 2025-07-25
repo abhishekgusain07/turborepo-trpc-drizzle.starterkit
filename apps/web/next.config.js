@@ -1,4 +1,18 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
 
-module.exports = nextConfig;
+
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.aceternity.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com'
+      }
+    ],
+  },
+}
+module.exports = nextConfig; 

@@ -10,14 +10,26 @@ import { Button } from "components/ui/button";
 import { Input } from "components/ui/input";
 import { Label } from "components/ui/label";
 import { Checkbox } from "components/ui/checkbox";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "components/ui/form";
 import { signIn } from "lib/client-auth";
-import { ZodSignInSchema, ZodSignUpSchema, type SignInInput, type SignUpInput } from "zod-schemas/auth";
-import { LINKS } from "constants";
+import {
+  ZodSignInSchema,
+  ZodSignUpSchema,
+  type SignInInput,
+  type SignUpInput,
+} from "zod-schemas/auth";
+import { LINKS } from "../../constants";
 
 interface AuthFormProps {
   type: "signin" | "signup";
-  onSubmit: (data: SignInInput | SignUpInput) => Promise<void>;
+  onSubmit: (data: any) => Promise<void>;
   isLoading?: boolean;
 }
 
@@ -26,11 +38,12 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const schema = type === "signin" ? ZodSignInSchema : ZodSignUpSchema;
-  const form = useForm({
+  const form = useForm<any>({
     resolver: zodResolver(schema),
-    defaultValues: type === "signin" 
-      ? { email: "", password: "" }
-      : { name: "", email: "", password: "", confirmPassword: "" }
+    defaultValues:
+      type === "signin"
+        ? { email: "", password: "" }
+        : { name: "", email: "", password: "", confirmPassword: "" },
   });
 
   const handleGoogleSignIn = async () => {
@@ -51,12 +64,14 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-700">Full Name</FormLabel>
+                  <FormLabel className="text-sm font-medium text-gray-700">
+                    Full Name
+                  </FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="Enter your full name" 
+                    <Input
+                      placeholder="Enter your full name"
                       className="h-11 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
-                      {...field} 
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -70,13 +85,15 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">Email</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-700">
+                  Email
+                </FormLabel>
                 <FormControl>
-                  <Input 
+                  <Input
                     type="email"
-                    placeholder="Enter your email" 
+                    placeholder="Enter your email"
                     className="h-11 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
-                    {...field} 
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
@@ -89,14 +106,16 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">Password</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-700">
+                  Password
+                </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Input 
+                    <Input
                       type={showPassword ? "text" : "password"}
-                      placeholder="••••••••" 
+                      placeholder="••••••••"
                       className="h-11 pr-10 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
-                      {...field} 
+                      {...field}
                     />
                     <button
                       type="button"
@@ -122,19 +141,23 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-700">Confirm Password</FormLabel>
+                  <FormLabel className="text-sm font-medium text-gray-700">
+                    Confirm Password
+                  </FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <Input 
+                      <Input
                         type={showConfirmPassword ? "text" : "password"}
-                        placeholder="••••••••" 
+                        placeholder="••••••••"
                         className="h-11 pr-10 border-gray-300 focus:border-slate-500 focus:ring-slate-500"
-                        {...field} 
+                        {...field}
                       />
                       <button
                         type="button"
                         className="absolute inset-y-0 right-0 flex items-center pr-3 hover:text-gray-600"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
                       >
                         {showConfirmPassword ? (
                           <EyeOff className="h-4 w-4 text-gray-400" />
@@ -158,8 +181,8 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
                   Remember me
                 </Label>
               </div>
-              <Link 
-                href="/auth/forgot-password" 
+              <Link
+                href="/auth/forgot-password"
                 className="text-sm text-blue-600 hover:text-blue-500 transition-colors"
               >
                 Forgot password?
@@ -168,12 +191,16 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
           )}
 
           <div className="pt-2">
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full h-11 bg-slate-900 hover:bg-slate-700 text-white font-medium transition-colors"
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : type === "signin" ? "Sign in" : "Create account"}
+              {isLoading
+                ? "Loading..."
+                : type === "signin"
+                  ? "Sign in"
+                  : "Create account"}
             </Button>
           </div>
         </form>
@@ -184,7 +211,9 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
           <span className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-3 text-gray-500 font-medium">Or continue with</span>
+          <span className="bg-white px-3 text-gray-500 font-medium">
+            Or continue with
+          </span>
         </div>
       </div>
 
@@ -217,7 +246,9 @@ export function AuthForm({ type, onSubmit, isLoading }: AuthFormProps) {
       </Button>
 
       <p className="text-center text-sm text-gray-600 pt-2">
-        {type === "signin" ? "Don't have an account?" : "Already have an account?"}{" "}
+        {type === "signin"
+          ? "Don't have an account?"
+          : "Already have an account?"}{" "}
         <Link
           href={type === "signin" ? LINKS.AUTH.SIGNUP : LINKS.AUTH.SIGNIN}
           className="font-medium text-blue-600 hover:text-blue-500 transition-colors"

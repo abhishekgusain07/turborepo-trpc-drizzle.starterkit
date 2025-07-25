@@ -1,52 +1,19 @@
 "use client";
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import ProblemSection from "./components/problem";
 import SolutionSection from "./components/solution";
 import Footer from "./components/footer";
 import TechnologyUsed from "./components/techused";
-import Announcement from "./components/announcement";
 import type { LucideIcon } from "lucide-react";
 import { NavbarDemo } from "components/ui/navbar";
-import Pricing from "./components/pricing";
 import { useFeedbackModal } from "hooks/useFeedbackModal";
 import { useUser } from "hooks/use-user";
 import { HoverEffect } from "components/effect/card-hover-effect";
+import Pricing from "components/ui/Pricing";
 
 export default function Home() {
-  const [showAnnouncement, setShowAnnouncement] = useState(true);
   const { user } = useUser();
-  const { openFeedbackModal, FeedbackModalComponent } = useFeedbackModal(user?.id);
-  
-  useEffect(() => {
-    // Check if the announcement has been dismissed before
-    const announcementDismissed = localStorage.getItem('announcement_dismissed');
-    if (!announcementDismissed) {
-      setShowAnnouncement(true);
-    }
-  }, []);
-  
-  const handleAnnouncementDismiss = () => {
-    // Store the dismissal in localStorage so it stays dismissed on refresh
-    localStorage.setItem('announcement_dismissed', 'true');
-    setShowAnnouncement(false);
-  };
-  
-  const announcement = {
-    message: "We value your input! Please",
-    link: {
-      text: "share your feedback",
-      url: "#feedback"
-    },
-    emoji: "💬"
-  };
-
-  // Handler for the announcement link click
-  const handleFeedbackClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    openFeedbackModal();
-  };
+  const { FeedbackModalComponent } = useFeedbackModal(user?.id);
 
   const features: Array<{
     title: string;
@@ -55,40 +22,40 @@ export default function Home() {
     icon?: LucideIcon;
   }> = [
     {
-      title: "Authentication",
+      title: "Turborepo Monorepo",
       description:
-        "Complete auth system with email, social login, magic links, and MFA support for secure user management.",
-      link: "#auth",
+        "Scalable monorepo architecture with pnpm workspaces, shared packages, and optimized build caching for enterprise-grade development.",
+      link: "#monorepo",
     },
     {
-      title: "Payments",
+      title: "Next.js 15 + React 19",
       description:
-        "Stripe integration with subscription management, pricing tiers, and billing portal for smooth revenue collection.",
-      link: "#payments",
+        "Latest Next.js with App Router, React Server Components, and Turbopack for blazing-fast development and production builds.",
+      link: "#nextjs",
     },
     {
-      title: "Analytics",
+      title: "Type-Safe APIs",
       description:
-        "Built-in analytics with PostHog and error tracking with Sentry to monitor user behavior and application health.",
-      link: "#analytics",
+        "End-to-end type safety with tRPC 11, TanStack Query integration, and automatic API documentation generation.",
+      link: "#trpc",
     },
     {
-      title: "Database",
+      title: "Database & ORM",
       description:
-        "Serverless PostgreSQL with Neon and Drizzle ORM for type-safe database operations with automatic scaling.",
+        "Drizzle ORM with PostgreSQL, type-safe migrations, database studio, and serverless-ready connection pooling.",
       link: "#database",
     },
     {
-      title: "UI Components",
+      title: "Modern Authentication",
       description:
-        "Beautiful, accessible UI components built with Radix UI and styled with Tailwind CSS for rapid development.",
-      link: "#ui",
+        "Better Auth with Google OAuth, session management, user permissions, and security best practices built-in.",
+      link: "#auth",
     },
     {
-      title: "Deployment",
+      title: "UI & Design System",
       description:
-        "Optimized for deployment on Vercel with continuous integration and automatic preview deployments.",
-      link: "#deployment",
+        "Radix UI components, Tailwind CSS 4, dark mode support, and a complete design system for consistent UX.",
+      link: "#ui",
     },
   ];
 
@@ -105,29 +72,52 @@ export default function Home() {
       <NavbarDemo>
         {/* Hero Section */}
         <section className="pt-8 pb-8 px-4 md:px-8 lg:px-16 flex flex-col items-center text-center">
+          <div className="mb-4 px-4 py-2 bg-secondary/80 rounded-full text-sm font-medium text-secondary-foreground">
+            🚀 Production-Ready Turborepo Template
+          </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-200 leading-tight">
-            Ship Your SaaS <br />
-            <span className="inline-block mt-1 mb-2">Blazingly Fast</span>
+            Build Scalable Apps <br />
+            <span className="inline-block mt-1 mb-2">With Modern Stack</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl mb-6">
-            Everything you need, ready to launch.
+          <p className="text-lg text-muted-foreground max-w-2xl mb-8 leading-relaxed">
+            Complete Turborepo monorepo with Next.js 15, tRPC, Drizzle ORM, Better Auth, 
+            and everything you need to ship production-ready applications fast.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/dashboard" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-md font-medium text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
+            <Link
+              href="/dashboard"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-md font-medium text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
+            >
               Get Started
+            </Link>
+            <Link
+              href="#features"
+              className="border border-border hover:bg-accent hover:text-accent-foreground px-8 py-3 rounded-md font-medium text-lg transition-all"
+            >
+              Explore Features
             </Link>
           </div>
         </section>
-        
+
         <TechnologyUsed />
         {/* Features Section */}
-        <section id="features" className="py-16 px-4 md:px-8 lg:px-16 bg-secondary/20">
+        <section
+          id="features"
+          className="py-16 px-4 md:px-8 lg:px-16 bg-secondary/20"
+        >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-16">Everything You Need</h2>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Everything You Need to Build at Scale
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                A comprehensive monorepo template with modern tools, best practices, 
+                and production-ready configurations to accelerate your development workflow.
+              </p>
+            </div>
             <HoverEffect items={features} />
           </div>
         </section>
-
 
         <ProblemSection />
 
@@ -139,19 +129,35 @@ export default function Home() {
 
         {/* CTA Section */}
         <section className="py-16 px-4 md:px-8 lg:px-16 bg-primary/5">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Launch your SaaS in record time with our production-ready template.
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Start Building Your Next Project Today
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Clone this Turborepo template and get a head start with modern architecture, 
+              best practices, and production-ready configurations.
             </p>
-            <Link href="/sign-up" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-md font-medium inline-block">
-              Start Building Now
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/dashboard"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-md font-medium text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
+              >
+                Try Live Demo
+              </Link>
+              <Link
+                href="https://github.com/yourusername/turborepo-template"
+                className="border border-border hover:bg-accent hover:text-accent-foreground px-8 py-3 rounded-md font-medium text-lg transition-all"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on GitHub
+              </Link>
+            </div>
           </div>
         </section>
         <Footer />
       </NavbarDemo>
-      
+
       {/* Render the feedback modal */}
       <FeedbackModalComponent />
     </div>

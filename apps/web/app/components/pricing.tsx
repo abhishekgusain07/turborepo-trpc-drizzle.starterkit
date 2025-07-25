@@ -9,27 +9,29 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CheckCircle2, DollarSign, Rocket } from "lucide-react";
+import { CheckCircle2, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { useUser } from "hooks/use-user";
+import { User } from "better-auth";
+
 
 type PricingSwitchProps = {
   onSwitch: (value: string) => void;
 };
 
 type PricingCardProps = {
-  user: any;
-  handleCheckout: any;
-  priceIdMonthly: any;
-  priceIdYearly: any;
+  user: User | undefined;
+  handleCheckout: (priceId: string, subscription: boolean) => void;
+  priceIdMonthly: string | undefined;
+  priceIdYearly: string | undefined;
   isYearly?: boolean;
   title: string;
   monthlyPrice?: number;
@@ -161,7 +163,10 @@ const PricingCard = ({
               router.push("/sign-in");
               return;
             }
-            handleCheckout(isYearly ? priceIdYearly : priceIdMonthly, true);
+            const priceId = isYearly ? priceIdYearly : priceIdMonthly;
+            if (priceId) {
+              handleCheckout(priceId, true);
+            }
           }}
           className={cn("w-full", {
             "bg-primary hover:bg-primary/90": popular || exclusive,
@@ -179,7 +184,7 @@ export default function Pricing() {
   const togglePricingPeriod = (value: string) =>
     setIsYearly(parseInt(value) === 1);
   const { user } = useUser();
-  const [stripePromise, setStripePromise] = useState<Promise<any> | null>(null);
+  const [stripePromise, setStripePromise] = useState<Promise<Stripe | null> | null>(null);
 
   useEffect(() => {
     setStripePromise(loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!));

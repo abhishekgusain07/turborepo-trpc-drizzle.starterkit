@@ -7,7 +7,8 @@ import { toast } from "sonner";
 import { AuthLayout } from "components/auth/auth-layout";
 import { AuthForm } from "components/auth/auth-form";
 import { signIn } from "lib/client-auth";
-import { LINKS } from "constants";
+import { LINKS } from "../../../constants";
+
 import type { SignInInput } from "zod-schemas/auth";
 
 export default function SignInPage() {
@@ -43,15 +44,12 @@ export default function SignInPage() {
       subtitle="Welcome back! Please enter your details."
       leftContent={{
         title: "YOUR NEXT ADVENTURE AWAITS!",
-        description: "Log in to unlock exclusive deals, plan your dream escapes, and pick up where you left off. Whether it's mountains, beaches, or city lights",
-        footer: "Your journey starts here."
+        description:
+          "Log in to unlock exclusive deals, plan your dream escapes, and pick up where you left off. Whether it's mountains, beaches, or city lights",
+        footer: "Your journey starts here.",
       }}
     >
-      <AuthForm 
-        type="signin" 
-        onSubmit={handleSignIn}
-        isLoading={isLoading}
-      />
+      <AuthForm type="signin" onSubmit={handleSignIn} isLoading={isLoading} />
     </AuthLayout>
   );
 }
