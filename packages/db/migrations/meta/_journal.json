@@ -15,6 +15,20 @@
       "when": 1753421159840,
       "tag": "0001_clammy_the_order",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1753528986660,
+      "tag": "0002_yummy_colleen_wing",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1753529232594,
+      "tag": "0003_curly_winter_soldier",
+      "breakpoints": true
     }
   ]
 }
