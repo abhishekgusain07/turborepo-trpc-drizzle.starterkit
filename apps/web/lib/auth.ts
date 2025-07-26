@@ -21,14 +21,14 @@ function safeParseDate(value: string | Date | null | undefined): Date | null {
 
 
 const polarClient = new Polar({
-  accessToken: process.env.POLAR_ACCESS_TOKEN,
+  accessToken: env.POLAR_ACCESS_TOKEN,
   server: "sandbox",
 });
 
 
 export const serverAuth: any = betterAuth({
-  trustedOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
-  allowedDevOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
+  trustedOrigins: [`${env.NEXT_PUBLIC_APP_URL}`],
+  allowedDevOrigins: [`${env.NEXT_PUBLIC_APP_URL}`],
   cookieCache: {
     enabled: true,
     maxAge: 5 * 60, // Cache duration in seconds
@@ -42,12 +42,12 @@ export const serverAuth: any = betterAuth({
     enabled: true,
     requireEmailVerification: false,
   },
-  // socialProviders: {
-  //   google: {
-  //     clientId: env.GOOGLE_CLIENT_ID,
-  //     clientSecret: env.GOOGLE_CLIENT_SECRET,
-  //   },
-  // },
+  socialProviders: {
+    google: {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    },
+  },
   user: {
     modelName: "users",
     additionalFields: {
@@ -86,14 +86,14 @@ export const serverAuth: any = betterAuth({
           products: [
             {
               productId:
-                process.env.NEXT_PUBLIC_STARTER_TIER ||
+                env.NEXT_PUBLIC_STARTER_TIER ||
                 (() => {
                   throw new Error(
                     "NEXT_PUBLIC_STARTER_TIER environment variable is required",
                   );
                 })(),
               slug:
-                process.env.NEXT_PUBLIC_STARTER_SLUG ||
+                env.NEXT_PUBLIC_STARTER_SLUG ||
                 (() => {
                   throw new Error(
                     "NEXT_PUBLIC_STARTER_SLUG environment variable is required",
@@ -101,14 +101,14 @@ export const serverAuth: any = betterAuth({
                 })(),
             },
           ],
-          successUrl: `${process.env.NEXT_PUBLIC_APP_URL}/${process.env.POLAR_SUCCESS_URL}`,
+          successUrl: `${env.NEXT_PUBLIC_APP_URL}${env.POLAR_SUCCESS_URL}`,
           authenticatedUsersOnly: true,
         }),
         portal(),
         usage(),
         webhooks({
           secret:
-            process.env.POLAR_WEBHOOK_SECRET ||
+            env.POLAR_WEBHOOK_SECRET ||
             (() => {
               throw new Error(
                 "POLAR_WEBHOOK_SECRET environment variable is required",

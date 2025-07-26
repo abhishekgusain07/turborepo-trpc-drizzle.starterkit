@@ -24,3 +24,24 @@ export async function GET() {
     );
   }
 }
+
+export async function POST() {
+  try {
+    const result = await serverAuth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!result?.session?.userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const subscriptionDetails = await getSubscriptionDetails();
+    return NextResponse.json(subscriptionDetails);
+  } catch (error) {
+    console.error("Error fetching subscription details:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch subscription details" },
+      { status: 500 }
+    );
+  }
+}

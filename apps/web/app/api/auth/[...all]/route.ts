@@ -1,6 +1,5 @@
 import { serverAuth } from "lib/auth";
+ // path to your auth file
+ import { toNextJsHandler } from "better-auth/next-js";
 
-const handler = serverAuth.handler;
-
-export const GET = handler;
-export const POST = handler;
+ export const { POST, GET } = toNextJsHandler(serverAuth);

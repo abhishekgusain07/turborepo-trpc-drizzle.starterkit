@@ -16,13 +16,19 @@ export const env = createEnv({
     CF_R2_SECRET_ACCESS_KEY: z.string().optional(),
     CF_R2_BUCKET_NAME: z.string().optional(),
     CF_R2_PUBLIC_DOMAIN: z.string().optional(),
+    POLAR_ACCESS_TOKEN: z.string(),
+    POLAR_WEBHOOK_SECRET: z.string(),
+    POLAR_SUCCESS_URL: z.string(),
   },
   client: {
     NEXT_PUBLIC_POSTHOG_HOST: z.string().optional(),
     NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
     NEXT_PUBLIC_OPENPANEL_CLIENT_ID: z.string().optional(),
     NEXT_PUBLIC_BASE_URL: z.string(),
+    NEXT_PUBLIC_APP_URL: z.string(),
     NEXT_PUBLIC_TRPC_BASE_URL: z.string(),
+    NEXT_PUBLIC_STARTER_TIER: z.string(),
+    NEXT_PUBLIC_STARTER_SLUG: z.string(),
   },
   runtimeEnv: {
     // =========== SERVER ===========
@@ -37,13 +43,19 @@ export const env = createEnv({
     CF_R2_SECRET_ACCESS_KEY: process.env.CF_R2_SECRET_ACCESS_KEY,
     CF_R2_BUCKET_NAME: process.env.CF_R2_BUCKET_NAME,
     CF_R2_PUBLIC_DOMAIN: process.env.CF_R2_PUBLIC_DOMAIN,
+    POLAR_ACCESS_TOKEN: process.env.POLAR_ACCESS_TOKEN,
+    POLAR_WEBHOOK_SECRET: process.env.POLAR_WEBHOOK_SECRET,
+    POLAR_SUCCESS_URL: process.env.POLAR_SUCCESS_URL,
     // =========== PUBLIC ===========
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_OPENPANEL_CLIENT_ID:
       process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_TRPC_BASE_URL: process.env.NEXT_PUBLIC_TRPC_BASE_URL,
+    NEXT_PUBLIC_STARTER_TIER: process.env.NEXT_PUBLIC_STARTER_TIER,
+    NEXT_PUBLIC_STARTER_SLUG: process.env.NEXT_PUBLIC_STARTER_SLUG,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 });

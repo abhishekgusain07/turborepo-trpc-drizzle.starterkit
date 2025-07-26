@@ -60,7 +60,7 @@ export default function PricingTable({
 
   const handleCheckout = async (productId: string, slug: string) => {
     if (isAuthenticated === false) {
-      router.push("/sign-in");
+      router.push("/auth/signin");
       return;
     }
 
