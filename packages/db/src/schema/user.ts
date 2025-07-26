@@ -52,7 +52,7 @@ export const verifications = pgTable("verifications", {
 });
 
 export const subscription = pgTable("subscription", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: text("id").primaryKey(),
   createdAt: timestamp("createdAt").notNull(),
   modifiedAt: timestamp("modifiedAt"),
   amount: integer("amount").notNull(),

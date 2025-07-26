@@ -42,12 +42,12 @@ export const serverAuth: any = betterAuth({
     enabled: true,
     requireEmailVerification: false,
   },
-  socialProviders: {
-    google: {
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-    },
-  },
+  // socialProviders: {
+  //   google: {
+  //     clientId: env.GOOGLE_CLIENT_ID,
+  //     clientSecret: env.GOOGLE_CLIENT_SECRET,
+  //   },
+  // },
   user: {
     modelName: "users",
     additionalFields: {
@@ -115,6 +115,9 @@ export const serverAuth: any = betterAuth({
               );
             })(),
           onPayload: async ({ data, type }) => {
+            console.log("🔔 Webhook received:", type);
+            console.log("📋 Full payload structure:", JSON.stringify(data, null, 2));
+            
             if (
               type === "subscription.created" ||
               type === "subscription.active" ||
@@ -124,12 +127,16 @@ export const serverAuth: any = betterAuth({
               type === "subscription.updated"
             ) {
               console.log("🎯 Processing subscription webhook:", type);
-              console.log("📦 Payload data:", JSON.stringify(data, null, 2));
 
               try {
-                // STEP 1: Extract user ID from customer data
-                const userId = data.customer?.externalId;
-                if (!userId) return;
+                // STEP 1: Extract user ID from customer data with better validation
+                console.log("👤 Customer data:", JSON.stringify(data.customer, null, 2));
+                const userId = data.customer?.externalId || data.customer?.externalId;
+                if (!userId) {
+                  console.error("❌ No user ID found in customer data");
+                  return;
+                }
+                console.log("✅ Found user ID:", userId);
                 // STEP 2: Build subscription data
                 const subscriptionData = {
                   id: data.id,
